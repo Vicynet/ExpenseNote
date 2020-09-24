@@ -1,6 +1,7 @@
 package com.expenseNote.model;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -29,6 +30,7 @@ public class Account {
     private BigInteger balance;
 
     @NotBlank
+    @CreatedBy
     @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
 
@@ -100,12 +102,12 @@ public class Account {
     public String
     toString() {
         return "Account{" +
-                "id=" + id +
-                ", accountType=" + accountType +
-                ", accountNumber=" + accountNumber +
-                ", balance=" + balance +
-                ", user=" + user +
-                ", createdAt=" + createdAt +
+                "id=" + getId() +
+                ", accountType=" + getAccountType() +
+                ", accountNumber=" + getAccountNumber() +
+                ", balance=" + getBalance() +
+                ", user=" + getUser() +
+                ", createdAt=" + getCreatedAt() +
                 '}';
     }
 }

@@ -1,6 +1,10 @@
 package com.expenseNote.model;
 
+import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedBy;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -34,7 +38,8 @@ public class Transaction {
     private BigInteger amount;
 
     @NotBlank
-    private Boolean isExpense = true;
+    @Enumerated(EnumType.STRING)
+    private TransactionType transactionType;
 
     @NotBlank
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -43,19 +48,25 @@ public class Transaction {
     @CreatedDate
     private LocalDate createdAt;
 
+    @LastModifiedDate
+    private LocalDate modifiedAt;
+
+
+
     public Transaction() {
     }
 
-    public Transaction(Long id, String title, String description, Category category, Account account, BigInteger amount, Boolean isExpense, User user, LocalDate createdAt) {
+    public Transaction(Long id, String title, String description, Category category, Account account, BigInteger amount, TransactionType transactionType, User user, LocalDate createdAt, LocalDate modifiedAt) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.category = category;
         this.account = account;
         this.amount = amount;
-        this.isExpense = isExpense;
+        this.transactionType = transactionType;
         this.user = user;
         this.createdAt = createdAt;
+        this.modifiedAt = modifiedAt;
     }
 
     public Long getId() {
@@ -106,12 +117,12 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public Boolean getIsExpense() {
-        return isExpense;
+    public TransactionType getTransactionType() {
+        return transactionType;
     }
 
-    public void setIsExpense(Boolean expense) {
-        isExpense = expense;
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
     }
 
     public User getUser() {
@@ -130,19 +141,27 @@ public class Transaction {
         this.createdAt = createdAt;
     }
 
+    public LocalDate getModifiedAt() {
+        return modifiedAt;
+    }
+
+    public void setModifiedAt(LocalDate modifiedAt) {
+        this.modifiedAt = modifiedAt;
+    }
+
     @Override
-    public String
-    toString() {
-        return "Expense{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", category=" + category +
-                ", account=" + account +
-                ", amount=" + amount +
-                ", isExpense=" + getIsExpense() +
-                ", user=" + user +
-                ", createdAt=" + createdAt +
+    public String toString() {
+        return "Transaction{" +
+                "id=" + getId() +
+                ", title='" + getTitle() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", category=" + getCategory() +
+                ", account=" + getAccount() +
+                ", amount=" + getAmount() +
+                ", transactionType=" + getTransactionType() +
+                ", user=" + getUser() +
+                ", createdAt=" + getCreatedAt() +
+                ", modifiedAt=" + getModifiedAt() +
                 '}';
     }
 }

@@ -1,9 +1,6 @@
 package com.expenseNote.model;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
 @Entity
@@ -15,12 +12,17 @@ public class Category {
     @NotBlank
     private String categoryName;
 
+    @NotBlank
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    private User user;
+
     public Category() {
     }
 
-    public Category(Long id, String categoryName) {
+    public Category(Long id, String categoryName, User user) {
         this.id = id;
         this.categoryName = categoryName;
+        this.user = user;
     }
 
     public Long getId() {
@@ -39,11 +41,20 @@ public class Category {
         this.categoryName = categoryName;
     }
 
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Category{" +
-                "id=" + id +
-                ", categoryName='" + categoryName + '\'' +
+                "id=" + getId() +
+                ", categoryName='" + getCategoryName() + '\'' +
+                ", user=" + getUser() +
                 '}';
     }
 }
