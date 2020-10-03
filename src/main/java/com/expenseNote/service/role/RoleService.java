@@ -16,5 +16,5 @@ public interface RoleService {
     void delete(Long roleId);
 
     Collection<Role> findAll();
-    
+
 }
