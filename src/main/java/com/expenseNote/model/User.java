@@ -29,7 +29,7 @@ public class User {
     private String lastName;
 
     @NotBlank
-    @Size(min = 8, max = 20)
+    @Size(min = 2, max = 20)
     private String username;
 
     @NotBlank
