@@ -1,5 +1,6 @@
 package com.expenseNote.controller;
 
+import com.expenseNote.config.EmailConfig;
 import com.expenseNote.model.Role;
 import com.expenseNote.model.RoleType;
 import com.expenseNote.model.User;
@@ -13,6 +14,7 @@ import com.expenseNote.security.jwt.JwtUtils;
 import com.expenseNote.service.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -21,6 +23,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.mail.MessagingException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -45,6 +49,9 @@ public class AuthController {
 
     @Autowired
     JwtUtils jwtUtils;
+
+    @Autowired
+    EmailConfig emailConfig;
 
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Validated @RequestBody LoginRequest loginRequest) {
@@ -75,7 +82,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Validated @RequestBody SignupRequest signupRequest) {
+    public ResponseEntity<?> registerUser(@Validated @RequestBody SignupRequest signupRequest) throws UnsupportedEncodingException, MessagingException {
         if (userRepository.existsByUsername(signupRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
@@ -126,6 +133,7 @@ public class AuthController {
 
         user.setRoles(roles);
         userRepository.save(user);
+        emailConfig.sendVerificationEmail(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }

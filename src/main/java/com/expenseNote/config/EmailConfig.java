@@ -1,11 +1,22 @@
 package com.expenseNote.config;
 
 import com.expenseNote.model.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 
 @Component
 public class EmailConfig {
+
+    @Autowired
+    private JavaMailSender mailSender;
+
 
     @Value("${spring.mail.host}")
     private String host;
@@ -66,6 +77,7 @@ public class EmailConfig {
     }
 
     public String mailContent(User user) {
+
         String content = "<p>Dear " + user.getFirstName() + ",</p>";
         content += "<p> Welcome to XpenseNote. Your new account comes with </p>";
         content += "<p> access to many useful features of XpenseNote, </p>";
@@ -74,5 +86,19 @@ public class EmailConfig {
         content += "<p></p><p></p><p></p><p></p><p>Victor Ihedioha,<br>For XpenseNote Team.</p>";
 
         return content;
+    }
+
+    public void sendVerificationEmail(User user) throws UnsupportedEncodingException, MessagingException {
+
+        MimeMessage message = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(message);
+
+        helper.setFrom(getUsername(), getSenderName());
+        helper.setTo(user.getEmail());
+        helper.setSubject(getSubject());
+        helper.setText(mailContent(user), true);
+
+        mailSender.send(message);
+
     }
 }
