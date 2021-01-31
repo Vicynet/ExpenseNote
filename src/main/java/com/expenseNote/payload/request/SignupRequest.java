@@ -1,83 +1,44 @@
 package com.expenseNote.payload.request;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import com.expenseNote.apps.role.model.Role;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.ToString;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Set;
 
+@Getter
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 public class SignupRequest {
 
     @NotBlank
     @Size(min = 2, max = 15)
-    private String firstName;
+    private final String firstName;
 
     @NotBlank
     @Size(min = 2, max = 15)
-    private String lastName;
+    private final String lastName;
 
     @NotBlank
     @Size(min = 2, max = 20)
-    private String username;
+    private final String username;
 
     @NotBlank
     @Size(max = 50)
     @Email
-    private String email;
+    private final String email;
 
     @NotBlank
     @Size(min = 8, max = 40)
-    private String password;
+    private final String password;
 
-    private Set<String> role;
+    private final Role role;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Set<String> getRole() {
-        return role;
-    }
-
-    public void setRole(Set<String> role) {
-        this.role = role;
-    }
+//    private final Set<String> role;
 }

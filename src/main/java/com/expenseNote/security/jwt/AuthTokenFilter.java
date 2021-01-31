@@ -1,6 +1,6 @@
 package com.expenseNote.security.jwt;
 
-import com.expenseNote.service.user.UserServiceImpl;
+import com.expenseNote.apps.user.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -45,7 +45,7 @@ public class AuthTokenFilter extends OncePerRequestFilter {
             }
         }
         catch (Exception e) {
-            logger.error("Cannot set user authentication: {}", e);
+            logger.error("Cannot set user authentication: " + e);
         }
 
         filterChain.doFilter(request, response);

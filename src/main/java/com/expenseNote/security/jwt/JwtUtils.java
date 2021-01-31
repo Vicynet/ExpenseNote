@@ -1,6 +1,6 @@
 package com.expenseNote.security.jwt;
 
-import com.expenseNote.service.user.UserService;
+import com.expenseNote.apps.user.model.User;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +23,7 @@ public class JwtUtils {
 
     public String generateJwtToken(Authentication authentication) {
 
-        UserService userPrincipal = (UserService) authentication.getPrincipal();
+        User userPrincipal = (User) authentication.getPrincipal();
 
         return Jwts.builder()
                 .setSubject((userPrincipal.getUsername()))
