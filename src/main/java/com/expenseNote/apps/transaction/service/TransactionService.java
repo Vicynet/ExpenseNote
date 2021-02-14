@@ -1,6 +1,7 @@
 package com.expenseNote.apps.transaction.service;
 
 import com.expenseNote.apps.transaction.model.Transaction;
+import com.expenseNote.apps.transaction.model.TransactionType;
 import com.expenseNote.apps.user.model.User;
 
 import java.util.Collection;
@@ -16,7 +17,9 @@ public interface TransactionService {
 
     Transaction update(Transaction transaction);
 
-    void delete(Long transactionId);
+    Optional<Transaction> findByType(TransactionType transactionType);
+
+    void deleteById(Long transactionId);
 
     Collection<Transaction> findAll();
 
