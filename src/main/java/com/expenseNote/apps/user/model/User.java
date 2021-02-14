@@ -13,10 +13,13 @@ import javax.validation.constraints.Size;
 import java.util.*;
 import java.util.logging.Logger;
 
+@Builder
 @Getter
 @Setter
+@ToString
 @EqualsAndHashCode
 @NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "users",
         uniqueConstraints = {
@@ -60,14 +63,11 @@ public class User implements UserDetails {
     @Size(min = 8, max = 40)
     @JsonIgnore
     private String password;
-//    @ManyToMany(fetch = FetchType.LAZY)
+
     @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
-//    private Set<Role> roles = new HashSet<>();
-//    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
-//    @OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private Role role;
     private Boolean locked = false;
@@ -87,15 +87,6 @@ public class User implements UserDetails {
         SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName().name());
         return Collections.singletonList(authority);
     }
-
-//    @Override
-//    public Collection<? extends GrantedAuthority> getAuthorities() {
-//        Role role = new Role();
-//        Logger logger = Logger.getLogger(getClass().getName());
-//        logger.info("Role name -->"+ role.getName().name());
-//        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(role.getName().name());
-//        return Collections.singletonList(authority);
-//    }
 
     @Override
     public String getUsername() {

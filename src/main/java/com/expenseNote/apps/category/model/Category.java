@@ -1,10 +1,17 @@
 package com.expenseNote.apps.category.model;
 
 import com.expenseNote.apps.user.model.User;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
+@Builder
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
 @Entity
 public class Category {
 
@@ -12,51 +19,12 @@ public class Category {
     private Long id;
 
     @NotBlank
+    @NotNull
     private String categoryName;
 
     @NotBlank
-    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+    @NotNull
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private User user;
 
-    public Category() {
-    }
-
-    public Category(Long id, String categoryName, User user) {
-        this.id = id;
-        this.categoryName = categoryName;
-        this.user = user;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCategoryName() {
-        return categoryName;
-    }
-
-    public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + getId() +
-                ", categoryName='" + getCategoryName() + '\'' +
-                ", user=" + getUser() +
-                '}';
-    }
 }

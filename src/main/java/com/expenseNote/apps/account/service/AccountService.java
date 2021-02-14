@@ -8,15 +8,17 @@ import java.util.Optional;
 
 public interface AccountService {
 
-    Collection<Account> findByUser(User user);
+    Collection<Account> findByExistingUser(User user);
 
     Account save(Account account);
 
     Optional<Account> findById(Long accountId);
 
+    Optional<Account> findByNumber(String accountNumber);
+
     Account update(Account account);
 
-    void delete(Long accountId);
+    void deleteById(Long accountId);
 
     Collection<Account> findAll();
 

@@ -15,7 +15,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 class RoleRepositoryTest {
 
-    Logger logger =Logger.getLogger(getClass().getName());
+    Logger logger = Logger.getLogger(getClass().getName());
 
     @Autowired
     RoleRepository roleRepository;

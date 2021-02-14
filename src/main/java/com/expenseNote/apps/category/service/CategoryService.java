@@ -16,7 +16,7 @@ public interface CategoryService {
 
     Category update(Category category);
 
-    void delete(Long categoryId);
+    void deleteById(Long categoryId);
 
     Collection<Category> findAll();
 
