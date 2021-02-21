@@ -54,6 +54,21 @@ class CategoryRepositoryTest {
     }
 
     @Test
+    void findCategoryByCategoryName() {
+        Collection<Category> allCategories = categoryRepository.findAll();
+
+        assertThat(allCategories.size()).isNotNull();
+        log.info("Category table is not empty --> {}", allCategories);
+
+        Optional<Category> category = categoryRepository.findCategoryByCategoryName("Food");
+        if (category.isPresent()) {
+            log.info("Category found -> {}", category);
+        } else {
+            log.info("Category does not exist");
+        }
+    }
+
+    @Test
     void findCategoriesByUser() {
         Collection<Category> allCategories = categoryRepository.findAll();
 

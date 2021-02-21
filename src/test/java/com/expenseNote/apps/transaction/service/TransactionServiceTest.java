@@ -67,10 +67,17 @@ class TransactionServiceTest {
     }
 
     @Test
-    void findByType() {
-        when(transactionService.findByType(transaction.getTransactionType())).thenReturn(Optional.of(transaction));
-        transactionService.findByType(transaction.getTransactionType());
-        verify(transactionRepository, times(1)).findByType(transaction.getTransactionType());
+    void findTransactionByTransactionType() {
+        when(transactionService.findTransactionByTransactionType(transaction.getTransactionType())).thenReturn(Optional.of(transaction));
+        transactionService.findTransactionByTransactionType(transaction.getTransactionType());
+        verify(transactionRepository, times(1)).findTransactionByTransactionType(transaction.getTransactionType());
+    }
+
+    @Test
+    void findTransactionsByTransactionType() {
+        when(transactionService.findTransactionsByTransactionType(transaction.getTransactionType())).thenReturn(transactions);
+        transactionService.findTransactionsByTransactionType(transaction.getTransactionType());
+        verify(transactionRepository, times(1)).findTransactionsByTransactionType(transaction.getTransactionType());
     }
 
     @Test

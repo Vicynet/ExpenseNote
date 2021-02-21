@@ -17,7 +17,9 @@ public interface TransactionService {
 
     Transaction update(Transaction transaction);
 
-    Optional<Transaction> findByType(TransactionType transactionType);
+    Optional<Transaction> findTransactionByTransactionType(TransactionType transactionType);
+
+    Collection<Transaction> findTransactionsByTransactionType(TransactionType transactionType);
 
     void deleteById(Long transactionId);
 

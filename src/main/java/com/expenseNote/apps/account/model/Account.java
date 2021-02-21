@@ -14,7 +14,6 @@ import java.math.BigInteger;
 import java.time.Instant;
 
 @Builder
-@ToString
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -45,4 +44,15 @@ public class Account {
     @CreatedDate
     private Instant createdAt;
 
+    @Override
+    public String toString() {
+        return "Account{" +
+                "id=" + id +
+                ", accountType=" + accountType +
+                ", accountNumber='" + accountNumber + '\'' +
+                ", balance=" + balance +
+                ", user=" + user.getId() +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }

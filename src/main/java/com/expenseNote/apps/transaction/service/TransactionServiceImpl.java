@@ -35,8 +35,13 @@ public class TransactionServiceImpl implements TransactionService {
     }
 
     @Override
-    public Optional<Transaction> findByType(TransactionType transactionType) {
-        return transactionRepository.findByType(transactionType);
+    public Optional<Transaction> findTransactionByTransactionType(TransactionType transactionType) {
+        return transactionRepository.findTransactionByTransactionType(transactionType);
+    }
+
+    @Override
+    public Collection<Transaction> findTransactionsByTransactionType(TransactionType transactionType) {
+        return transactionRepository.findTransactionsByTransactionType(transactionType);
     }
 
     @Override

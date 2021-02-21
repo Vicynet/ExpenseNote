@@ -5,20 +5,18 @@ import com.expenseNote.apps.category.model.Category;
 import com.expenseNote.apps.user.model.User;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.lang.Nullable;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.math.BigInteger;
-import java.time.LocalDate;
+import java.time.Instant;
 
 @Builder
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
 @Entity
 public class Transaction {
 
@@ -53,9 +51,20 @@ public class Transaction {
     private User user;
 
     @CreatedDate
-    private LocalDate createdAt;
+    private Instant createdAt;
 
-    @LastModifiedDate
-    private LocalDate modifiedAt;
-
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", category=" + category.getId() +
+                ", account=" + account.getId() +
+                ", amount=" + amount +
+                ", transactionType=" + transactionType +
+                ", user=" + user.getId() +
+                ", createdAt=" + createdAt +
+                '}';
+    }
 }
