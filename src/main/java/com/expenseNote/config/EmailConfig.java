@@ -1,6 +1,7 @@
 package com.expenseNote.config;
 
 import com.expenseNote.apps.user.model.User;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -12,6 +13,7 @@ import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 
 @Component
+@Data
 public class EmailConfig {
 
     @Autowired
@@ -35,42 +37,6 @@ public class EmailConfig {
 
     @Value("${senderName}")
     private String senderName;
-
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public short getPort() {
-        return port;
-    }
-
-    public void setPort(short port) {
-        this.port = port;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getSubject() {
-        return subject;
-    }
 
     public String getSenderName() {
         return senderName;

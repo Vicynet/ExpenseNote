@@ -32,13 +32,13 @@ public class User implements UserDetails {
 
     @Id
     @SequenceGenerator(
-            name = "moniKeeper_user_sequence",
-            sequenceName = "moniKeeper_user_sequence",
+            name = "expense_note_user_sequence",
+            sequenceName = "expense_note_user_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "moniKeeper_user_sequence"
+            generator = "expense_note_user_sequence"
     )
     private Long id;
 

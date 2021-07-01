@@ -17,6 +17,7 @@ import java.time.Instant;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 @Entity
 public class Account {
 
@@ -43,16 +44,4 @@ public class Account {
     @NotBlank
     @CreatedDate
     private Instant createdAt;
-
-    @Override
-    public String toString() {
-        return "Account{" +
-                "id=" + id +
-                ", accountType=" + accountType +
-                ", accountNumber='" + accountNumber + '\'' +
-                ", balance=" + balance +
-                ", user=" + user.getId() +
-                ", createdAt=" + createdAt +
-                '}';
-    }
 }

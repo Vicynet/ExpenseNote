@@ -17,6 +17,7 @@ import java.time.Instant;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString
 @Entity
 public class Transaction {
 
@@ -52,19 +53,4 @@ public class Transaction {
 
     @CreatedDate
     private Instant createdAt;
-
-    @Override
-    public String toString() {
-        return "Transaction{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", category=" + category.getId() +
-                ", account=" + account.getId() +
-                ", amount=" + amount +
-                ", transactionType=" + transactionType +
-                ", user=" + user.getId() +
-                ", createdAt=" + createdAt +
-                '}';
-    }
 }

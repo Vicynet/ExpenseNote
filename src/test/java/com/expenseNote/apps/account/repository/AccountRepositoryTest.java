@@ -20,7 +20,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
 @Slf4j
-class AccountRepositoryTest {
+class   AccountRepositoryTest {
 
     @Autowired
     private AccountRepository accountRepository;
